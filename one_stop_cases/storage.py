@@ -125,6 +125,17 @@ class Database:
         connection.execute('INSERT INTO events VALUES(?,?,?,?,?,?,?)', (event.event_id,event.aggregate_type,event.aggregate_id,event.kind,
                            event.occurred_at.isoformat(),canonical_json(event.payload),event.sequence))
 
+    def all_events(self, aggregate_type: str | None = None) -> list[dict[str, Any]]:
+        if aggregate_type is None:
+            sql = 'SELECT * FROM events ORDER BY aggregate_id, sequence'
+            values: tuple[Any, ...] = ()
+        else:
+            sql = 'SELECT * FROM events WHERE aggregate_type=? ORDER BY aggregate_id, sequence'
+            values = (aggregate_type,)
+        with contextlib.closing(self.connect()) as connection:
+            rows = connection.execute(sql, values).fetchall()
+        return [dict(row) | {'payload': json.loads(row['payload_json'])} for row in rows]
+
     def events_for(self, aggregate_type: str, aggregate_id: str) -> list[dict[str, Any]]:
         with contextlib.closing(self.connect()) as connection:
             rows = connection.execute('SELECT * FROM events WHERE aggregate_type=? AND aggregate_id=? ORDER BY sequence',

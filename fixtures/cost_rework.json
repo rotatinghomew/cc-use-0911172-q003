@@ -1,0 +1,133 @@
+{
+  "workflows": {
+    "talent-subsidy-v3": [
+      {"id": "intake", "requires": []},
+      {"id": "eligibility_review", "requires": ["intake"], "compensate": "reopen_review"},
+      {"id": "fund_check", "requires": ["eligibility_review"], "compensate": "release_fund_hold"},
+      {"id": "issuance", "requires": ["fund_check"]}
+    ],
+    "talent-subsidy-v4": [
+      {"id": "intake", "requires": []},
+      {"id": "eligibility_review", "requires": ["intake"], "compensate": "reopen_review"},
+      {"id": "fund_check", "requires": ["eligibility_review"], "compensate": "release_fund_hold"},
+      {"id": "issuance", "requires": ["fund_check"]}
+    ]
+  },
+  "cost_events": [
+    {
+      "event_id": "a-01", "case_id": "RC-2026-0001", "kind": "case_intake",
+      "occurred_at": "2026-11-10T09:00:00+00:00", "sequence": 1,
+      "payload": {"request_key": "REQ-0001", "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-02", "case_id": "RC-2026-0001", "kind": "step_started",
+      "occurred_at": "2026-11-10T09:00:00+00:00", "sequence": 2,
+      "payload": {"step_id": "intake", "attempt": 1, "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-03", "case_id": "RC-2026-0001", "kind": "step_succeeded",
+      "occurred_at": "2026-11-10T09:30:00+00:00", "sequence": 3,
+      "payload": {"step_id": "intake", "attempt": 1, "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-04", "case_id": "RC-2026-0001", "kind": "step_started",
+      "occurred_at": "2026-11-10T09:30:00+00:00", "sequence": 4,
+      "payload": {"step_id": "eligibility_review", "attempt": 1, "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-05", "case_id": "RC-2026-0001", "kind": "step_failed",
+      "occurred_at": "2026-11-10T11:00:00+00:00", "sequence": 5,
+      "payload": {"step_id": "eligibility_review", "attempt": 1, "error": "document_mismatch", "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-06", "case_id": "RC-2026-0001", "kind": "compensation_started",
+      "occurred_at": "2026-11-10T11:15:00+00:00", "sequence": 6,
+      "payload": {"step_id": "eligibility_review", "action": "reopen_review", "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-07", "case_id": "RC-2026-0001", "kind": "compensation_completed",
+      "occurred_at": "2026-11-10T11:45:00+00:00", "sequence": 7,
+      "payload": {"step_id": "eligibility_review", "action": "reopen_review", "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-08", "case_id": "RC-2026-0001", "kind": "step_restarted",
+      "occurred_at": "2026-11-10T13:15:00+00:00", "sequence": 8,
+      "payload": {"step_id": "eligibility_review", "attempt": 2, "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-09", "case_id": "RC-2026-0001", "kind": "step_succeeded",
+      "occurred_at": "2026-11-10T14:00:00+00:00", "sequence": 9,
+      "payload": {"step_id": "eligibility_review", "attempt": 2, "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-10", "case_id": "RC-2026-0001", "kind": "step_started",
+      "occurred_at": "2026-11-10T14:00:00+00:00", "sequence": 10,
+      "payload": {"step_id": "fund_check", "attempt": 1, "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-11", "case_id": "RC-2026-0001", "kind": "step_succeeded",
+      "occurred_at": "2026-11-10T14:20:00+00:00", "sequence": 11,
+      "payload": {"step_id": "fund_check", "attempt": 1, "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-12", "case_id": "RC-2026-0001", "kind": "step_started",
+      "occurred_at": "2026-11-10T14:20:00+00:00", "sequence": 12,
+      "payload": {"step_id": "issuance", "attempt": 1, "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-13", "case_id": "RC-2026-0001", "kind": "step_succeeded",
+      "occurred_at": "2026-11-10T14:40:00+00:00", "sequence": 13,
+      "payload": {"step_id": "issuance", "attempt": 1, "service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "a-14", "case_id": "RC-2026-0001", "kind": "case_completed",
+      "occurred_at": "2026-11-10T15:00:00+00:00", "sequence": 14,
+      "payload": {"service_version": "talent-subsidy-v3", "intake_batch_id": "BATCH-20261110-01"}
+    },
+    {
+      "event_id": "b-01", "case_id": "RC-2026-0002", "kind": "case_intake",
+      "occurred_at": "2026-11-11T09:00:00+00:00", "sequence": 1,
+      "payload": {"request_key": "REQ-0002", "service_version": "talent-subsidy-v4", "intake_batch_id": "BATCH-20261111-01"}
+    },
+    {
+      "event_id": "b-02", "case_id": "RC-2026-0002", "kind": "step_started",
+      "occurred_at": "2026-11-11T09:00:00+00:00", "sequence": 2,
+      "payload": {"step_id": "intake", "attempt": 1, "service_version": "talent-subsidy-v4", "intake_batch_id": "BATCH-20261111-01"}
+    },
+    {
+      "event_id": "b-03", "case_id": "RC-2026-0002", "kind": "step_succeeded",
+      "occurred_at": "2026-11-11T09:20:00+00:00", "sequence": 3,
+      "payload": {"step_id": "intake", "attempt": 1, "service_version": "talent-subsidy-v4", "intake_batch_id": "BATCH-20261111-01"}
+    },
+    {
+      "event_id": "b-04", "case_id": "RC-2026-0002", "kind": "step_started",
+      "occurred_at": "2026-11-11T09:20:00+00:00", "sequence": 4,
+      "payload": {"step_id": "eligibility_review", "attempt": 1, "service_version": "talent-subsidy-v4", "intake_batch_id": "BATCH-20261111-01"}
+    },
+    {
+      "event_id": "c-01", "case_id": "RC-2026-0003", "kind": "case_intake",
+      "occurred_at": "2026-11-11T10:00:00+00:00", "sequence": 1,
+      "payload": {"request_key": "REQ-0003", "service_version": "talent-subsidy-v4", "intake_batch_id": "BATCH-20261111-01"}
+    },
+    {
+      "event_id": "c-02", "case_id": "RC-2026-0003", "kind": "step_started",
+      "occurred_at": "2026-11-11T10:00:00+00:00", "sequence": 2,
+      "payload": {"step_id": "intake", "attempt": 1, "service_version": "talent-subsidy-v4", "intake_batch_id": "BATCH-20261111-01"}
+    },
+    {
+      "event_id": "c-03", "case_id": "RC-2026-0003", "kind": "step_succeeded",
+      "occurred_at": "2026-11-11T10:25:00+00:00", "sequence": 3,
+      "payload": {"step_id": "intake", "attempt": 1, "service_version": "talent-subsidy-v4", "intake_batch_id": "BATCH-20261111-01"}
+    },
+    {
+      "event_id": "c-04", "case_id": "RC-2026-0003", "kind": "step_started",
+      "occurred_at": "2026-11-11T10:25:00+00:00", "sequence": 4,
+      "payload": {"step_id": "eligibility_review", "attempt": 1, "service_version": "talent-subsidy-v4", "intake_batch_id": "BATCH-20261111-01"}
+    },
+    {
+      "event_id": "c-05", "case_id": "RC-2026-0003", "kind": "step_failed",
+      "occurred_at": "2026-11-11T11:10:00+00:00", "sequence": 5,
+      "payload": {"step_id": "eligibility_review", "attempt": 1, "error": "missing_degree", "service_version": "talent-subsidy-v4", "intake_batch_id": "BATCH-20261111-01"}
+    }
+  ]
+}
